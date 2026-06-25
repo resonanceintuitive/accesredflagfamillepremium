@@ -394,13 +394,150 @@
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
+
+
+        .auth-screen {
+            min-height: calc(100vh - 40px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 520px;
+            background: #fafaf8;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            overflow: hidden;
+            border: 1px solid #e0dcd3;
+        }
+
+        .auth-card-header {
+            background: linear-gradient(135deg, #8b7355 0%, #6d5a47 100%);
+            color: #fff;
+            padding: 34px 28px;
+            text-align: center;
+        }
+
+        .auth-card-header h1 {
+            font-size: 26px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .auth-card-header p {
+            font-size: 14px;
+            opacity: 0.92;
+            line-height: 1.5;
+        }
+
+        .auth-card-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .auth-card-body label {
+            display: block;
+            color: #2c2c2a;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #d3d1c7;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #2c2c2a;
+            background: #fff;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .password-input:focus {
+            border-color: #ba7517;
+            box-shadow: 0 0 0 3px rgba(186, 117, 23, 0.12);
+        }
+
+        .auth-error {
+            display: none;
+            margin-top: 12px;
+            color: #a32d2d;
+            background: #FCEBEB;
+            border: 1px solid #e24b4a;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .auth-note {
+            margin-top: 16px;
+            color: #888780;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .auth-button {
+            width: 100%;
+            margin-top: 18px;
+            background: #ba7517;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            transition: all 0.2s ease;
+        }
+
+        .auth-button:hover {
+            background: #9d6512;
+            transform: translateY(-1px);
+        }
+
+        .logout-link {
+            display: inline-block;
+            margin-top: 14px;
+            background: transparent;
+            border: none;
+            color: #8b7355;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-card">
+            <div class="auth-card-header">
+                <h1>🔒 RED FLAG Famille Premium</h1>
+                <p>Bienvenue dans votre espace Premium. Saisissez le mot de passe reçu après votre achat.</p>
+            </div>
+            <div class="auth-card-body">
+                <label for="premiumPassword">Mot de passe Premium</label>
+                <input type="password" id="premiumPassword" class="password-input" placeholder="Entrez votre mot de passe" autocomplete="current-password">
+                <div id="authError" class="auth-error">Mot de passe incorrect. Vérifiez le code reçu après votre achat.</div>
+                <button class="auth-button" onclick="unlockPremium()">ACCÉDER À MON ESPACE PREMIUM</button>
+                <p class="auth-note">L'accès reste mémorisé sur cet appareil. Si le mot de passe change, un nouveau code sera transmis aux clientes actives.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="appContainer" style="display: none;">
+
         <div class="header">
             <h1>RED FLAG Famille Premium</h1>
             <p>Analyse complète des rôles familiaux que tu continues à reproduire</p>
+            <button class="logout-link" onclick="lockPremium()">Verrouiller l'accès</button>
         </div>
         
         <div class="content results-container">
@@ -430,6 +567,65 @@
     </div>
 
     <script>
+
+        // ===== ACCÈS PREMIUM PAR MOT DE PASSE =====
+        // Pour changer le mot de passe, modifie uniquement la valeur ci-dessous.
+        // Mot de passe actuel à donner aux clientes : RIF-JUILLET26
+        const premiumPasswordHash = 'UklGLUpVSUxMRVQyNg==';
+        const premiumAccessKey = 'redFlagFamillePremiumAccessGranted';
+
+        function getPremiumPassword() {
+            return atob(premiumPasswordHash);
+        }
+
+        function unlockPremium() {
+            const input = document.getElementById('premiumPassword');
+            const error = document.getElementById('authError');
+            const entered = (input.value || '').trim();
+            if (entered === getPremiumPassword()) {
+                localStorage.setItem(premiumAccessKey, 'true');
+                showPremiumApp();
+                error.style.display = 'none';
+                input.value = '';
+            } else {
+                error.style.display = 'block';
+                input.focus();
+            }
+        }
+
+        function showPremiumApp() {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('appContainer').style.display = 'block';
+        }
+
+        function showAuthScreen() {
+            document.getElementById('authScreen').style.display = 'flex';
+            document.getElementById('appContainer').style.display = 'none';
+            setTimeout(() => {
+                const input = document.getElementById('premiumPassword');
+                if (input) input.focus();
+            }, 50);
+        }
+
+        function lockPremium() {
+            localStorage.removeItem(premiumAccessKey);
+            showAuthScreen();
+        }
+
+        function initializePremiumAccess() {
+            if (localStorage.getItem(premiumAccessKey) === 'true') {
+                showPremiumApp();
+            } else {
+                showAuthScreen();
+            }
+            const input = document.getElementById('premiumPassword');
+            if (input) {
+                input.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') unlockPremium();
+                });
+            }
+        }
+
         // ===== CONFIGURATION =====
         const testCompletedKey = 'redFlagFamillePremiumTestCompleted';
         const resultsKey = 'redFlagFamillePremiumResults';
@@ -1100,6 +1296,7 @@ C'est pour ça qu'une lecture corporelle approfondie peut révéler des choses q
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initializePremiumAccess();
             const saved = localStorage.getItem('redFlagFamillePremiumAnswers');
             if (saved) {
                 answers = JSON.parse(saved);
