@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED FLAG Famille Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5ede3 0%, #ede8df 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c2c2a;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fafaf8;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8b7355 0%, #6d5a47 100%);
+            color: #fff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .content { padding: 40px 30px; }
+        
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0dcd3;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #888780;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            color: #8b7355;
+            border-bottom-color: #ba7517;
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .question-group { margin-bottom: 24px; }
+        
+        .question-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c2c2a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .question-group .options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .option-btn {
+            padding: 10px 16px;
+            border: 1.5px solid #d3d1c7;
+            background: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #5f5e5a;
+            transition: all 0.2s ease;
+        }
+        
+        .option-btn:hover {
+            border-color: #ba7517;
+            background: #faeeda;
+        }
+        
+        .option-btn.selected {
+            background: #ba7517;
+            color: #fff;
+            border-color: #ba7517;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e0dcd3;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #639922 0%, #ba7517 50%, #993c1d 100%);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #ba7517;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #9d6512;
+            transform: scale(1.02);
+        }
+        
+        .btn-secondary {
+            background: #e0dcd3;
+            color: #2c2c2a;
+        }
+        
+        .btn-secondary:hover {
+            background: #d3d1c7;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #ba7517 0%, #9d6512 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 6px 16px rgba(186, 117, 23, 0.35);
+        }
+        
+        .cta-box h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .cta-box p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #ba7517;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .result-light {
+            background: #fff9f0;
+            border: 3px solid #ba7517;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .result-light h2 {
+            font-size: 24px;
+            color: #8b7355;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .result-light .profile-name {
+            font-size: 22px;
+            color: #ba7517;
+            font-weight: 700;
+            margin: 12px 0;
+        }
+
+        .result-light .confidence {
+            font-size: 13px;
+            color: #888780;
+            margin: 8px 0;
+            font-style: italic;
+        }
+
+        .result-light p {
+            color: #5f5e5a;
+            font-size: 14px;
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+
+        .lock-box {
+            background: #FCEBEB;
+            border: 3px solid #e24b4a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .lock-box h3 {
+            color: #a32d2d;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+
+        .lock-box p {
+            color: #5f5e5a;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+
+        .secondary-hook {
+            background: #fff3e0;
+            border-left: 4px solid #ba7517;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .secondary-hook p {
+            color: #5f5e5a;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .emotional-context {
+            background: #f5f1e8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .emotional-context p {
+            color: #5f5e5a;
+            font-size: 13px;
+            line-height: 1.7;
+            margin: 8px 0;
+        }
+
+        .results-container {
+            background: #fafaf8;
+        }
+
+        #resultsContainer {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0dcd3;
+        }
+
+        .analysis-box {
+            background: #f5f1e8;
+            border-left: 4px solid #ba7517;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .analysis-box h3 {
+            font-size: 16px;
+            color: #2c2c2a;
+            margin: 0 0 12px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analysis-box p {
+            color: #5f5e5a;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 12px 0;
+        }
+
+        .analysis-box p:first-of-type {
+            margin-top: 0;
+        }
+
+        .analysis-box ul {
+            margin: 12px 0 0 24px;
+            font-size: 14px;
+            color: #5f5e5a;
+            line-height: 1.7;
+        }
+
+        .analysis-box li {
+            margin: 10px 0;
+        }
+
+        .analysis-box strong {
+            color: #8b7355;
+            font-weight: 600;
+        }
+
+        .consultation-cta {
+            background: linear-gradient(135deg, #ba7517 0%, #9d6512 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0 0 0;
+            box-shadow: 0 6px 16px rgba(186, 117, 23, 0.35);
+        }
+
+        .consultation-cta h3 {
+            font-size: 18px;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+        }
+
+        .consultation-cta p {
+            font-size: 13px;
+            margin: 8px 0;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .consultation-btn {
+            background: white;
+            color: #ba7517;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 16px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .consultation-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RED FLAG Famille Premium</h1>
+            <p>Analyse complète des rôles familiaux que tu continues à reproduire</p>
+        </div>
+        
+        <div class="content results-container">
+            <div class="tabs">
+                <button class="tab-button active">Test Premium</button>
+            </div>
+            
+            <div id="assessment" class="tab-content active">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                
+                <div id="questionsContainer"></div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitAssessment()">Faire le test Premium</button>
+                    <button class="btn btn-secondary" id="resetBtn" onclick="resetAssessment()">Effacer / Refaire le test</button>
+                </div>
+
+                <div id="resultsContainer">
+                    <div style="text-align: center; color: #888780; font-size: 14px; margin-top: 40px; padding: 20px; border-top: 2px solid #e0dcd3;">
+                        Réponds au test Premium complet pour afficher ton analyse personnalisée.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURATION =====
+        const testCompletedKey = 'redFlagFamillePremiumTestCompleted';
+        const resultsKey = 'redFlagFamillePremiumResults';
+        
+        // 20 questions comportementales (5 par catégorie)
+        const allQuestions = {
+            parentification: [
+                { text: "Tu t'excuses même quand tu n'as rien fait.", value: 5 },
+                { text: "Ton premier réflexe quand quelqu'un souffre c'est de le réconforter, même au détriment de toi.", value: 5 },
+                { text: "Tu sais mieux écouter qu'être écoutée.", value: 4 },
+                { text: "Tu culpabilises quand tu dis non, même pour des choses raisonnables.", value: 4 },
+                { text: "Tu continues à prendre soin d'une personne de ta famille qui ne te l'a jamais demandé.", value: 5 }
+            ],
+            manipulation: [
+                { text: "Tu réfléchis longtemps avant d'oser dire non.", value: 5 },
+                { text: "Tu as du mal à exprimer tes besoins, même à tes proches.", value: 5 },
+                { text: "Tu crois que si tu dis non, les gens vont t'en vouloir.", value: 4 },
+                { text: "Tu remarques souvent que tu hoches la tête alors que tu voulais dire non.", value: 4 },
+                { text: "Tu préfères te taire plutôt que de créer un conflit.", value: 5 }
+            ],
+            culpabilite: [
+                { text: "Tu sens une responsabilité pour le bonheur de tes proches.", value: 5 },
+                { text: "Tu te demandes souvent si tu as fait quelque chose de mal, même quand ce n'est pas ton problème.", value: 5 },
+                { text: "Tu culpabilises juste d'avoir des besoins.", value: 4 },
+                { text: "Tu crois que tu dois réparer les choses qui vont mal dans la famille.", value: 4 },
+                { text: "Tu portes le poids émotionnel de ta famille sur tes épaules.", value: 5 }
+            ],
+            favoritisme: [
+                { text: "Tu te compares souvent aux autres et tu sors perdante.", value: 5 },
+                { text: "Tu cherches la validation extérieure pour te sentir bien.", value: 5 },
+                { text: "Tu acceptes des choses inacceptables par peur d'être abandonnée.", value: 4 },
+                { text: "Tu as le sentiment de devoir mériter l'amour des gens.", value: 4 },
+                { text: "Tu sens que tu n'as jamais été assez pour quelqu'un d'important dans ta vie.", value: 5 }
+            ]
+        };
+
+        // ===== CONTENU PERSONNALISÉ - 8 BLOCS PAR PROFIL =====
+        const personnalizedContent = {
+            parentification: {
+                name: "L'Enfant Parent",
+                blocks: {
+                    synthese: {
+                        title: "🧩 Ta synthèse personnalisée",
+                        content: `Tu as grandi en prenant soin des autres. C'était ta responsabilité bien avant que ce soit ton choix.
+
+Aujourd'hui encore, tu fais passer les besoins des autres avant les tiens — pas par gentillesse, mais par automatisme. Tu anticipes leurs problèmes, tu arranges les choses avant même qu'on te le demande, tu cherches à maintenir la paix à n'importe quel prix.
+
+Ce n'est pas ton caractère. C'est un rôle que tu as appris très tôt, et tu l'as joué pendant tellement longtemps qu'il est devenu invisible.`
+                    },
+                    erreurs: {
+                        title: "⚠️ Tes erreurs invisibles",
+                        content: `• Tu demandes rarement de l'aide — ça n'a jamais été une option pour toi.
+• Tu minimises ce que tu ressens au profit de ce que ressentent les autres.
+• Tu pardonnes trop rapidement, même quand ce n'était pas à toi de pardonner.
+• Tu confonds responsabilité personnelle et culpabilité transgénérationnelle.
+• Tu crois que si quelque chose va mal, c'est à toi de le réparer.`
+                    },
+                    consequences: {
+                        title: "📉 Ce que ce rôle te coûte aujourd'hui",
+                        content: `Tu attires des personnes qui prennent sans retour — des gens habitués à quelqu'un qui se sacrifie pour eux.
+
+Tu te demandes pourquoi tu te sens vidée après chaque relation, comme si tu avais vidé un puits sans jamais le remplir.
+
+Ton corps accumule la fatigue émotionnelle que tu refuses d'écouter. Les douleurs — au dos, aux épaules, au cou — sont souvent l'expression de ce poids que tu continues à porter.
+
+Tu risques de finir isolée, pas parce que tu n'as pas d'amis, mais parce que tu as oublié comment recevoir.`
+                    },
+                    forces: {
+                        title: "💚 Tes forces cachées",
+                        content: `• Tu sais vraiment écouter. Pas le faux "écouter" — tu entends ce que les gens ne disent pas.
+• Tu vois la souffrance des autres avant même qu'ils la nomment.
+• Tu es capable de te reconstruire après des périodes impossibles.
+• Tu possèdes une empathie intelligente — celle qui crée des liens réels.
+• Quand tu retrouves ta place, tu deviens quelqu'un d'extrêmement stable pour ceux qui en ont vraiment besoin.`
+                    },
+                    reproduction: {
+                        title: "🔄 Ce que tu reproduis dans tes relations amoureuses",
+                        content: `Tu cherches quelqu'un à "réparer" ou à "aider" — pas consciemment, mais c'est le seul pattern que tu connais pour créer du lien.
+
+Quand un partenaire est stable et heureux, tu te sens inutile. Donc tu crées de petits problèmes, ou tu attires quelqu'un de blessé pour avoir un rôle.
+
+Tu acceptes des choses inacceptables parce que tu crois que c'est ça, l'amour : se sacrifier.
+
+Tes relations deviennent transactionnelles : tu donnes, donc tu mérites qu'on t'aime. Pas à de l'amour vrai.`
+                    },
+                    planAction: {
+                        title: "🎯 Ton plan d'action sur 30 jours",
+                        content: `<strong>Semaine 1 :</strong> Observe toutes les fois où tu t'occupes de quelque chose qui ne t'appartient pas. Juste observe. Ne change rien encore.
+
+<strong>Semaine 2 :</strong> Commence à dire "Je vais vérifier si c'est vraiment mon problème" avant de sauter à la résolution.
+
+<strong>Semaine 3 :</strong> Demande une seule chose pour toi chaque jour — quelque chose de simple. Un café, une heure seule, un non sans explication.
+
+<strong>Semaine 4 :</strong> Regarde ce qui change dans tes relations quand tu arrêtes de gérer les émotions des autres.`
+                    },
+                    corpsExprime: {
+                        title: "💫 Ce que ton corps exprime souvent dans ce type de fonctionnement",
+                        content: `Quand tu as longtemps pris la place de celle qui gère, rassure, organise et protège, ton corps finit rarement neutre.
+
+Chez beaucoup de personnes ayant ce fonctionnement, les épaules se chargent d'une tension chronique — comme si elles portaient un poids invisible. La mâchoire se contracte, le ventre reste en vigilance, comme si une partie devait rester disponible en permanence.
+
+Il est fréquent d'observer un sommeil léger, fragmenté, avec des réveils nocturnes. Au réveil après 8 heures, la fatigue persiste, parce que le système nerveux n'a jamais vraiment relâché.
+
+Il y a aussi cette sensation de boule dans la poitrine, cet essoufflement quand quelqu'un te demande quelque chose, cette fatigue émotionnelle qui s'accumule silencieusement.
+
+Tout ça, c'est ton corps qui parle. Et personne ne t'a jamais appris à l'écouter.`
+                    }
+                }
+            },
+            manipulation: {
+                name: "La Victime Silencieuse",
+                blocks: {
+                    synthese: {
+                        title: "🧩 Ta synthèse personnalisée",
+                        content: `Tu as appris très tôt qu'il y avait un prix à dire les choses. Peut-être qu'on t'ignorait, peut-être qu'on t'en voulait, ou pire — peut-être qu'on t'utilisait tes paroles contre toi.
+
+Du coup tu t'es tue. Tu as observé plutôt que de parler. Tu as accepté plutôt que de contredire.
+
+Aujourd'hui, tu doutes encore de ton droit à la parole. Tu te demandes si ce que tu penses est important. Tu crois que si tu dis non, tu risques de tout perdre.
+
+Ce silence n'est pas ta nature. C'est une protection qu'on t'a appris à construire.`
+                    },
+                    erreurs: {
+                        title: "⚠️ Tes erreurs invisibles",
+                        content: `• Tu préfères te taire plutôt que de risquer un conflit, même petit.
+• Tu accumules de la frustration parce que les autres ne savent pas ce qui se passe en toi.
+• Tu hoches la tête quand tu veux dire non.
+• Tu crois que ta voix n'a pas de valeur si elle n'arrange personne.
+• Tu penses que pour être aimée, tu dois être facile — donc tu deviens invisible.`
+                    },
+                    consequences: {
+                        title: "📉 Ce que ce rôle te coûte aujourd'hui",
+                        content: `Les autres pensent que tout va bien chez toi parce que tu ne dis jamais que ça va mal.
+
+Tu accumules de la frustration qui finit par exploser dans des moments inappropriés — pas sur le vrai problème, mais sur quelque chose sans importance.
+
+Tes relations se construisent sur du non-dit. Les gens se demandent ce que tu penses vraiment, parce que tu ne t'es jamais montrée.
+
+Et quand quelqu'un te quitte, tu réalises qu'il ne t'a jamais vraiment connue — parce que tu ne t'es jamais vraiment dévoilée.
+
+Ton corps exprime ce silence. Et personne ne t'a jamais entendue pleurer en silence.`
+                    },
+                    forces: {
+                        title: "💚 Tes forces cachées",
+                        content: `• Tu observes finement les comportements — tu sais lire les gens mieux que quiconque.
+• Tu écoutes vraiment, sans chercher à corriger ou à juger.
+• Tu es loyale envers les gens qui te font confiance.
+• Tu as une intelligence émotionnelle fine — tu sens les non-dits.
+• Quand tu trouves ta voix, elle porte une authenticité que peu de gens possèdent.`
+                    },
+                    reproduction: {
+                        title: "🔄 Ce que tu reproduis dans tes relations amoureuses",
+                        content: `Tu cherches quelqu'un de dominant — quelqu'un qui parle pour deux. Ça te soulage de ne pas avoir à dire ce que tu penses.
+
+Mais rapidement, tu te sens diminuée. Ton partenaire pense qu'il te connaît, mais il ne connaît qu'une version domestiquée de toi.
+
+Quand tu lèves la voix une seule fois, c'est un choc pour lui. Parce que tu n'as jamais exprimé tes besoins avant.
+
+Tes relations ressemblent à un vide — pas par manque d'amour, mais par manque de vraie communication. Et le silence finit par tuer même les plus beaux amours.`
+                    },
+                    planAction: {
+                        title: "🎯 Ton plan d'action sur 30 jours",
+                        content: `<strong>Semaine 1 :</strong> Observe chaque fois que tu dis oui alors que tu voulais dire non. Juste remarque-le.
+
+<strong>Semaine 2 :</strong> Exprime un petit désaccord — quelque chose de simple — sans te justifier. "Je ne suis pas d'accord" c'est suffisant.
+
+<strong>Semaine 3 :</strong> Partage une pensée, une opinion, une envie que tu as gardée pour toi. Juste une.
+
+<strong>Semaine 4 :</strong> Regarde comment les gens réagissent quand tu commences à être vraie.`
+                    },
+                    corpsExprime: {
+                        title: "💫 Ce que ton corps exprime souvent dans ce type de fonctionnement",
+                        content: `Quand tu as longtemps avalé tes paroles, ton corps finit par le payer.
+
+Ta gorge pourrait se fermer, cette sensation de boule qu'on appelle "gorge serrée". Tu pourrais avoir des difficultés à parler en public, même devant des gens proches. La voix pourrait s'affaiblir, devenir presque inaudible.
+
+Ta poitrine pourrait se comprimer, comme si tu retenais toujours quelque chose. Des migraines, des tensions dans le cou et la mâchoire pourraient apparaître régulièrement.
+
+Et puis il y a ce sentiment de suffocation émotionnelle — pas physique, mais réel. Comme si tu t'étouffais en silence.
+
+Il est courant d'observer un sommeil perturbé par cette frustration non exprimée — des cauchemars, des réveils soudains, une sensation de ne jamais vraiment te reposer.
+
+Tout ça, c'est ton corps qui crie ce que ta bouche refuse de dire.`
+                    }
+                }
+            },
+            culpabilite: {
+                name: "La Responsable de Tout",
+                blocks: {
+                    synthese: {
+                        title: "🧩 Ta synthèse personnalisée",
+                        content: `Tu portes le poids invisible de ta famille sur tes épaules. Pas littéralement — mais émotionnellement, c'est comme si tout te revenait.
+
+Tu crois que si quelque chose va mal chez quelqu'un d'autre, c'est parce que tu n'as pas pu l'empêcher. Tu culpabilises de choses qui ne dépendent absolument pas de toi.
+
+Et le pire ? Tu crois que c'est normal. Que c'est comme ça que fonctionne l'amour.
+
+Ce n'est pas normal. C'est un fonctionnement transgénérationnel — tu as hérité de la culpabilité de ta mère, ou de ta grand-mère. Et maintenant tu la transmets.`
+                    },
+                    erreurs: {
+                        title: "⚠️ Tes erreurs invisibles",
+                        content: `• Tu crois que tu es responsable du bonheur des autres.
+• Tu confonds empathie et responsabilité — tu penses que parce que tu comprends quelqu'un, tu dois le sauver.
+• Tu culpabilises juste d'exister, juste d'avoir tes besoins.
+• Tu cherches à compenser des choses que tu n'as pas causées.
+• Tu te dis "c'est de ma faute" même pour des problèmes qui étaient là avant ta naissance.`
+                    },
+                    consequences: {
+                        title: "📉 Ce que ce rôle te coûte aujourd'hui",
+                        content: `Tu es constamment en mode urgence émotionnelle. Quelqu'un a un problème ? Tu dois le résoudre. Quelqu'un est triste ? Tu dois la rendre heureuse.
+
+Tu ne prends jamais de vrai repos parce qu'il y a toujours quelqu'un qui a besoin de quelque chose.
+
+Et quand les choses ne s'arrangent pas (spoiler : elles ne s'arrangent souvent pas), tu culpabilises encore plus. Comme si tu avais échoué à ta mission.
+
+Tes relations amoureuses deviennent des projets de sauvetage plutôt que de vrais partenariats. Tu finis avec des gens qui prennent sans jamais donner, parce que tu as l'impression que c'est à toi de compenser.
+
+Tu t'épuises à gérer les émotions des autres au lieu de vivre ta vie.`
+                    },
+                    forces: {
+                        title: "💚 Tes forces cachées",
+                        content: `• Tu as une capacité rare à te connecter à la souffrance des autres.
+• Tu es fiable — vraiment, pas juste en paroles.
+• Tu sais comment aider vraiment, pas comment faire semblant.
+• Tu as une force de reconstruction impressionnante après des périodes difficiles.
+• Tu possèdes une sagesse qui vient de comprendre les complexités humaines très tôt.`
+                    },
+                    reproduction: {
+                        title: "🔄 Ce que tu reproduis dans tes relations amoureuses",
+                        content: `Tu cherches quelqu'un qui a "du potentiel" mais qui n'a pas encore trouvé sa place. C'est ça qui t'attire : l'idée que tu peux l'aider à devenir qui il devrait être.
+
+Mais ça n'a rien à voir avec l'amour. C'est du sauvetage.
+
+Et quand tu réalises qu'il n'a pas envie de changer, que tu peux l'aider autant que tu veux mais que ça dépend de lui, tu culpabilises. Tu penses que tu n'as pas assez essayé.
+
+Tes relations se terminent parce que tu épuises ton énergie à donner à quelqu'un qui n'a jamais vraiment demandé — ni voulu — être sauvé.
+
+Et la culpabilité te suit même après la rupture.`
+                    },
+                    planAction: {
+                        title: "🎯 Ton plan d'action sur 30 jours",
+                        content: `<strong>Semaine 1 :</strong> Chaque fois que tu ressens de la culpabilité, arrête-toi. Demande-toi : "C'est vraiment ma responsabilité ?" Juste la question.
+
+<strong>Semaine 2 :</strong> Accepte un problème que quelqu'un d'autre doit résoudre. Ne le fais pas. Laisse-le gérer.
+
+<strong>Semaine 3 :</strong> Prends soin de toi — vraiment, consciemment — sans te sentir coupable. Une heure sans penser à quelqu'un d'autre.
+
+<strong>Semaine 4 :</strong> Observe comment les choses avancent sans toi dans certains domaines.`
+                    },
+                    corpsExprime: {
+                        title: "💫 Ce que ton corps exprime souvent dans ce type de fonctionnement",
+                        content: `Quand tu portes la culpabilité de tout le monde, ton corps finit par craquer.
+
+Chez beaucoup de personnes avec ce fonctionnement, le diaphragme est constamment tendu, comme compressé. La respiration devient courte, superficielle. Il y a souvent une impression d'étouffer même sans raison physique.
+
+Les épaules se voûtent, portent cette charge invisible. Le bas du dos se raidit, devient douloureux, comme si le corps était constamment en alerte pour « retenir » quelque chose.
+
+Et puis il y a cette fatigue profonde, pas celle du sommeil — celle de l'âme. Au réveil, la fatigue est déjà là. Le corps demande du repos, mais l'esprit ne s'arrête jamais.
+
+Il y a aussi des tensions au plexus solaire, cette région au-dessus du ventre où la culpabilité aime se loger. Des nausées, des difficultés digestives sont fréquentes.
+
+Le système nerveux est en surcharge permanente parce qu'il doit gérer la responsabilité de tout.`
+                    }
+                }
+            },
+            favoritisme: {
+                name: "Celle Qui N'Était Jamais Assez",
+                blocks: {
+                    synthese: {
+                        title: "🧩 Ta synthèse personnalisée",
+                        content: `Tu n'étais pas la préférée. Peut-être que tu avais un frère plus doué, une sœur plus belle, un parent qui t'aimait moins que le reste.
+
+Du coup, tu as décidé que tu allais mériter ta place. Que si tu étais assez bonne, assez performante, assez gentille, finalement on te choisirait.
+
+Aujourd'hui, tu cherches encore à mériter l'amour au lieu de simplement le recevoir. Tu crois que tu dois constamment prouver ta valeur, que si tu relâches une seconde, on va voir que tu n'es pas assez.
+
+Ce n'était jamais la vérité. Le problème n'était pas toi. C'était leur manière d'aimer.
+
+Mais ton corps l'a cru. Et maintenant, tu le reproduis partout.`
+                    },
+                    erreurs: {
+                        title: "⚠️ Tes erreurs invisibles",
+                        content: `• Tu te compares constamment à d'autres femmes — toujours tu sors perdante.
+• Tu cherches la validation extérieure comme une drogue. Si quelqu'un te complimente, tu planes. S'il te critique, tu t'effondres.
+• Tu acceptes des choses inacceptables plutôt que de risquer l'abandon.
+• Tu confonds valeur personnelle et performance, compétences, apparence.
+• Tu attends que quelqu'un d'autre te dise que tu es suffisante.`
+                    },
+                    consequences: {
+                        title: "📉 Ce que ce rôle te coûte aujourd'hui",
+                        content: `Tu es en compétition permanente — même avec tes amies. Tu remarques tout de suite quand quelqu'un d'autre reçoit de l'attention, et ça te brise.
+
+Tes relations amoureuses deviennent des tests de fidélité. Tu cherches des signes que tu es "la choisie", parce que tu n'as jamais vraiment senti l'être.
+
+Tu acceptes des infidélités, des abandons, des manques d'égards parce que tu crois que c'est la rançon pour être aimée.
+
+Et quand quelqu'un te quitte, tu implose. Parce que c'est la preuve finale : tu n'étais vraiment pas assez.
+
+Tu passes ta vie à courir après quelque chose que personne ne pourra jamais te donner assez.`
+                    },
+                    forces: {
+                        title: "💚 Tes forces cachées",
+                        content: `• Tu es résiliente — vraiment. Tu te relèves de choses qui cassent d'autres personnes.
+• Tu as une capacité d'adaptation impressionnante à n'importe quelle situation.
+• Tu sais comment te transformer, te réinventer, tu as cette force de recommencer.
+• Tu observes les autres avec beaucoup de nuance — tu vois leurs forces même quand eux ne les voient pas.
+• Quand tu arrêtes de te comparer, tu deviens quelqu'un d'extraordinaire.`
+                    },
+                    reproduction: {
+                        title: "🔄 Ce que tu reproduis dans tes relations amoureuses",
+                        content: `Tu cherches quelqu'un qui a plus que toi — plus de succès, plus d'assurance, plus de pouvoir. Ça place déjà la hiérarchie : tu es en dessous.
+
+Tu crois que si tu es avec quelqu'un de "supérieur", ça prouvera que tu as finalement de la valeur.
+
+Mais ça ne fonctionne jamais. Parce que tu seras toujours celle qui essaie de mériter, et lui sera toujours celui qui pouvait choisir à tout moment de partir.
+
+Tes relations ressemblent à des entretiens d'embauche permanents : tu dois prouver que tu es "la bonne" pour garder le poste.
+
+Et ça tue l'amour réel — où deux personnes se choisissent simplement parce qu'elles se veulent.`
+                    },
+                    planAction: {
+                        title: "🎯 Ton plan d'action sur 30 jours",
+                        content: `<strong>Semaine 1 :</strong> Chaque fois que tu cherches une validation externe, arrête-toi. Demande-toi si tu en as vraiment besoin pour être suffisante.
+
+<strong>Semaine 2 :</strong> Fais quelque chose juste pour toi — pas pour plaire, pas pour être vue, juste pour ta satisfaction personnelle.
+
+<strong>Semaine 3 :</strong> Arrête une forme de perfectionnisme — une seule. Celle qui te coûte le plus.
+
+<strong>Semaine 4 :</strong> Observe comment les gens qui t'aiment vraiment ne demandent pas plus de toi. Qu'ils sont contents de juste toi.`
+                    },
+                    corpsExprime: {
+                        title: "💫 Ce que ton corps exprime souvent dans ce type de fonctionnement",
+                        content: `Quand tu as longtemps cherché à mériter ta place, ton corps finit par en payer le prix.
+
+Tu pourrais avoir une fatigue chronique — pas celle du travail, mais celle de l'acceptation de soi. Une sensation permanente de ne jamais être "assez bien".
+
+Tes mains pourraient trembler légèrement quand tu fais quelque chose d'important — cette peur d'échouer, de ne pas être à la hauteur.
+
+Il est courant d'avoir une contraction au cœur, une sensation d'oppression dans la poitrine — parce que quelque part, tu sais que tu attends quelque chose que personne ne peut vraiment te donner.
+
+Le sommeil est souvent fragmenté par des pensées obsédantes — des scénarios où tu n'étais pas assez, où tu aurais dû faire mieux.
+
+Et puis il y a cette sensation de vide — pas dépressif, mais existentiel. Comme si tu construisais constamment une version de toi pour quelqu'un d'autre, jamais pour toi.
+
+Ton corps cherche l'apaisement que tu ne peux pas te donner toute seule.`
+                    }
+                }
+            },
+            none: {
+                name: "Aucun rôle dominant net",
+                blocks: {
+                    synthese: {
+                        title: "🧩 Ta synthèse personnalisée",
+                        content: `Ce test rapide n'a pas identifié un rôle familial dominant chez toi — ce qui peut signifier plusieurs choses.
+
+Tu as peut-être une relation plus équilibrée avec ta famille, ou tes rôles sont plus subtils, plus complexes, plus entrecroisés.
+
+C'est aussi possible que tu aies des rôles qui existent mais qui apparaissent seulement dans certains contextes — avec un parent mais pas l'autre, dans une période de ta vie mais pas dans une autre.
+
+Ce qui est sûr, c'est que les rôles familiaux toxiques n'impactent pas tout le monde de la même manière. Et si tu sens quand même qu'il y a quelque chose, c'est important d'écouter ça.`
+                    },
+                    erreurs: {
+                        title: "⚠️ Ce que le test rapide ne peut pas montrer",
+                        content: `• Un rôle familial peut être moins visible parce qu'il s'exprime différemment — pas en comportement, mais en émotions ou sensations corporelles.
+• Tu peux avoir plusieurs rôles légers plutôt qu'un seul dominant.
+• Ton rôle peut avoir changé depuis que tu es enfant — tu l'as peut-être consciemment déconstruit.
+• Il est possible que tu aies appris à "faire semblant", donc le rôle existe mais reste caché même pour toi.
+• Ou — et c'est aussi important — tu as vraiment une relation saine avec ta famille.`
+                    },
+                    consequences: {
+                        title: "📉 Si tu sens quand même qu'il y a quelque chose...",
+                        content: `Ne rejette pas cette intuition. Souvent, ce qui ne se voit pas au premier coup d'œil est ce qui impacte le plus profondément.
+
+Les rôles subtils — ceux qui existent "juste un peu" — peuvent créer des patterns relationnels tout aussi toxiques que les rôles évidents.
+
+C'est pour ça que le test complet existe : pour aller plus loin, avec plus de questions, plus de nuance, plus de contexte.
+
+Et c'est aussi pour ça qu'une consultation peut être utile, même quand le test ne montre rien.`
+                    },
+                    forces: {
+                        title: "💚 Ce que l'absence de rôle dominant peut signifier",
+                        content: `• Le test rapide n'a simplement pas trouvé de rôle dominant. Cela ne signifie pas forcément qu'il n'existe pas.
+• Tu as une certaine fluidité dans tes relations — tu peux t'adapter sans te perdre.
+• Tu possèdes une autonomie émotionnelle que beaucoup de gens envient.
+• Tu sais probablement reconnaître une relation toxique parce que tu n'es pas dedans.
+• Tu as une vraie chance de créer des relations saines, si c'est ce que tu choisis.`
+                    },
+                    reproduction: {
+                        title: "🔄 Ce que tu pourrais reproduire sans t'en rendre compte",
+                        content: `Même sans rôle familial dominant, il est facile de reproduire des patterns subtils dans les relations amoureuses.
+
+Par exemple : chercher quelqu'un qui "résout" ton ambivalence, ou qui te rend dépendante de sa validation même si tu n'en as pas besoin consciemment.
+
+Ou attirer des gens dont les rôles toxiques sont justement ce qui te met à l'aise — parce que tu comprends ça, tu sais le naviguer.
+
+C'est souvent quand on n'a pas de rôle évident qu'on risque le plus de finir avec quelqu'un qui en a un très marqué.`
+                    },
+                    planAction: {
+                        title: "🎯 Ton plan d'action sur 30 jours",
+                        content: `<strong>Semaine 1 :</strong> Observe tes relations amoureuses. Y a-t-il un pattern ? Une attirance pour un certain type de personne ?
+
+<strong>Semaine 2 :</strong> Demande-toi ce que tu cherches dans une relation. Qu'attends-tu de l'autre ?
+
+<strong>Semaine 3 :</strong> Identifie une croyance sur toi que tu penses venir de ta famille — même inconsciemment.
+
+<strong>Semaine 4 :</strong> Note comment tes relations changent quand tu agis à partir de choix, pas de patterns hérités.`
+                    },
+                    corpsExprime: {
+                        title: "💫 Ce que ton corps exprime souvent dans ce type de fonctionnement",
+                        content: `Même si tu n'as pas de rôle dominant visible, ton corps pourrait quand même retenir des tensions familiales subtiles.
+
+Tu pourrais ressentir une légère sensation de "je ne suis pas vraiment à ma place" — pas oppressante, mais persistante.
+
+Il y a peut-être une hésitation dans tes mouvements, une légère contraction quand tu dois prendre une décision personnelle, comme si tu consultais encore quelqu'un d'autre à l'intérieur.
+
+Ou au contraire : une hyper-vigilance douce, toujours attentive aux signaux des autres, même chez les gens qui ne la demandent pas.
+
+Ces tensions pourraient être minimes, presque invisibles. Mais elles structurent quand même comment tu entres en relation avec le monde, comme avec les autres.
+
+C'est pour ça qu'une lecture corporelle approfondie peut révéler des choses que le test rapide ne montre pas.`
+                    }
+                }
+            }
+        };
+
+        // ===== FIN CONTENU PERSONNALISÉ =====
+
+        const profiles = {
+            parentification: {
+                name: "L'Enfant Parent",
+                description: "Tu as grandi en t'occupant des autres. Aujourd'hui tu attires encore ceux qui prennent."
+            },
+            manipulation: {
+                name: "La Victime Silencieuse",
+                description: "Tu as appris à te taire. Aujourd'hui tu doutes de ton droit à la parole."
+            },
+            culpabilite: {
+                name: "La Responsable de Tout",
+                description: "Tu portes le poids invisible de ta famille. Aujourd'hui tu culpabilises juste d'exister."
+            },
+            favoritisme: {
+                name: "Celle Qui N'Était Jamais Assez",
+                description: "Tu n'étais pas la préférée. Aujourd'hui tu crois devoir mériter ta place."
+            },
+            none: {
+                name: "Aucun rôle dominant net",
+                description: "Tes réponses ne montrent pas de rôle familial dominant avec ce test rapide. Le test complet permettrait d'aller plus loin."
+            }
+        };
+
+        let answers = {};
+        let selectedQuestions = [];
+        const questionsKey = 'redFlagFamillePremiumQuestions';
+
+        function initializeQuestions() {
+            const savedQuestions = localStorage.getItem(questionsKey);
+            if (savedQuestions) {
+                selectedQuestions = JSON.parse(savedQuestions);
+            } else {
+                selectedQuestions = [];
+                Object.keys(allQuestions).forEach(category => {
+                    // PREMIUM : 4 questions par catégorie = 16 questions au total.
+                    // On garde une analyse plus sérieuse que le gratuit, sans transformer ça en interrogatoire de préfecture.
+                    const questionsInCategory = [...allQuestions[category]];
+                    questionsInCategory.sort(() => Math.random() - 0.5);
+                    questionsInCategory.slice(0, 4).forEach((question, idx) => {
+                        selectedQuestions.push({
+                            id: `${category}_${idx}_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+                            category: category,
+                            text: question.text,
+                            value: question.value
+                        });
+                    });
+                });
+                selectedQuestions.sort(() => Math.random() - 0.5);
+                localStorage.setItem(questionsKey, JSON.stringify(selectedQuestions));
+            }
+            renderQuestions();
+        }
+
+        function renderQuestions() {
+            let html = '';
+            selectedQuestions.forEach((q, index) => {
+                const savedAnswer = answers[q.id];
+                html += `
+                    <div class="question-group">
+                        <div class="question-title">
+                            ${index + 1}. ${q.text}
+                        </div>
+                        <div class="options">
+                            <button class="option-btn ${savedAnswer === 'oui' ? 'selected' : ''}" 
+                                    onclick="answerQuestion('${q.id}', 'oui')">Oui</button>
+                            <button class="option-btn ${savedAnswer === 'non' ? 'selected' : ''}" 
+                                    onclick="answerQuestion('${q.id}', 'non')">Non</button>
+                            <button class="option-btn ${savedAnswer === 'parfois' ? 'selected' : ''}" 
+                                    onclick="answerQuestion('${q.id}', 'parfois')">Parfois</button>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('questionsContainer').innerHTML = html;
+            updateProgress();
+        }
+
+        function answerQuestion(questionId, answer) {
+            answers[questionId] = answer;
+            localStorage.setItem('redFlagFamillePremiumAnswers', JSON.stringify(answers));
+            renderQuestions();
+        }
+
+        function updateProgress() {
+            const totalQ = selectedQuestions.length || 16;
+            const answered = Object.keys(answers).filter(id => selectedQuestions.some(q => q.id === id)).length;
+            const percent = Math.min(100, (answered / totalQ) * 100);
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+
+        function submitAssessment() {
+            const totalQ = selectedQuestions.length || 16;
+            const answered = Object.keys(answers).filter(id => selectedQuestions.some(q => q.id === id)).length;
+            if (answered < totalQ) {
+                alert(`Réponds à toutes les questions. Il en reste ${totalQ - answered}.`);
+                return;
+            }
+
+            generateResult();
+        }
+
+        function formatPremiumBlock(block) {
+            let blockHtml = `<div class="analysis-box"><h3>${block.title}</h3>`;
+            let inList = false;
+            const lines = block.content.split('\n');
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                if (line.startsWith('•')) {
+                    if (!inList) {
+                        blockHtml += '<ul>';
+                        inList = true;
+                    }
+                    blockHtml += `<li>${line.substring(1).trim()}</li>`;
+                } else if (line.startsWith('<')) {
+                    if (inList) {
+                        blockHtml += '</ul>';
+                        inList = false;
+                    }
+                    blockHtml += line;
+                } else if (line.trim()) {
+                    if (inList) {
+                        blockHtml += '</ul>';
+                        inList = false;
+                    }
+                    blockHtml += `<p>${line}</p>`;
+                }
+            }
+            if (inList) blockHtml += '</ul>';
+            blockHtml += '</div>';
+            return blockHtml;
+        }
+
+        function generateResult() {
+            const scores = {
+                parentification: 0,
+                manipulation: 0,
+                culpabilite: 0,
+                favoritisme: 0
+            };
+
+            selectedQuestions.forEach(question => {
+                const answer = answers[question.id];
+                if (answer === 'oui') {
+                    scores[question.category] += question.value;
+                } else if (answer === 'parfois') {
+                    scores[question.category] += Math.round(question.value / 2);
+                }
+            });
+
+            const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const maxScore = sorted[0][1];
+            let mainProfile;
+            
+            if (maxScore === 0) {
+                mainProfile = 'none';
+            } else {
+                const topProfiles = sorted.filter(s => s[1] === maxScore);
+                mainProfile = topProfiles[Math.floor(Math.random() * topProfiles.length)][0];
+            }
+
+            let html = `
+                <div class="result-light" style="margin-bottom: 20px;">
+                    <h2 style="font-size: 18px; margin-bottom: 20px;">Ton analyse Premium</h2>
+                    <div class="profile-name" style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">${profiles[mainProfile].name}</div>
+                    <p style="font-size: 14px; line-height: 1.6; color: #555; margin: 0;">${profiles[mainProfile].description}</p>
+                </div>`;
+
+            const content = personnalizedContent[mainProfile];
+            if (content && content.blocks) {
+                const blockOrder = ['synthese', 'erreurs', 'consequences', 'forces', 'reproduction', 'planAction', 'corpsExprime'];
+                blockOrder.forEach(blockKey => {
+                    const block = content.blocks[blockKey];
+                    if (block) html += formatPremiumBlock(block);
+                });
+            }
+
+            html += `
+                <div class="consultation-cta" style="margin-top: 40px;">
+                    <p style="font-size: 15px; margin-bottom: 12px;"><strong>Tu veux aller encore plus loin ?</strong></p>
+                    <p style="font-size: 14px; margin-bottom: 16px;">Une consultation Résonance Intuitive permet de remonter à la source de ces rôles, d'identifier ce qui continue à les activer aujourd'hui, et de travailler sur ce que ton corps exprime.</p>
+                    <a href="https://www.resonanceintuitive.com/consultations" target="_blank" class="consultation-btn">Réserver ma consultation (75 €)</a>
+                    <p style="font-size: 12px; color: #888780; margin-top: 12px;">En cabinet ou en visio • 1h</p>
+                </div>
+
+                <div class="button-group" style="margin-top: 24px;">
+                    <button class="btn btn-secondary" onclick="resetAssessment()">Effacer et refaire le test</button>
+                </div>
+            `;
+
+            document.getElementById('resultsContainer').innerHTML = html;
+            localStorage.setItem(testCompletedKey, 'true');
+            localStorage.setItem(resultsKey, html);
+            hideTestUI();
+            updateButtonsState();
+        }
+
+        function updateButtonsState() {
+            const isTestCompleted = localStorage.getItem(testCompletedKey) === 'true';
+            const submitBtn = document.getElementById('submitBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            if (isTestCompleted) {
+                submitBtn.style.display = 'none';
+                resetBtn.style.display = 'none';
+            } else {
+                submitBtn.style.display = 'inline-block';
+                resetBtn.style.display = 'inline-block';
+                resetBtn.textContent = 'Effacer / Refaire le test';
+            }
+        }
+
+        function hideTestUI() {
+            document.getElementById('progressFill').parentElement.style.display = 'none';
+            document.getElementById('questionsContainer').style.display = 'none';
+            document.querySelector('.button-group').style.display = 'none';
+        }
+
+        function showTestUI() {
+            document.getElementById('progressFill').parentElement.style.display = 'block';
+            document.getElementById('questionsContainer').style.display = 'block';
+            document.querySelector('.button-group').style.display = 'flex';
+        }
+
+        function resetAssessment() {
+            if (confirm('Recommencer le test ?')) {
+                answers = {};
+                selectedQuestions = [];
+                localStorage.removeItem('redFlagFamillePremiumAnswers');
+                localStorage.removeItem(questionsKey);
+                localStorage.removeItem(testCompletedKey);
+                localStorage.removeItem(resultsKey);
+                document.getElementById('resultsContainer').innerHTML = `
+                    <div style="text-align: center; color: #888780; font-size: 14px; margin-top: 40px; padding: 20px; border-top: 2px solid #e0dcd3;">
+                        Réponds au test Premium complet pour afficher ton analyse personnalisée.
+                    </div>
+                `;
+                initializeQuestions();
+                showTestUI();
+                updateButtonsState();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('redFlagFamillePremiumAnswers');
+            if (saved) {
+                answers = JSON.parse(saved);
+            }
+            if (localStorage.getItem(testCompletedKey) === 'true') {
+                const savedResults = localStorage.getItem(resultsKey);
+                if (savedResults) {
+                    document.getElementById('resultsContainer').innerHTML = savedResults;
+                    hideTestUI();
+                }
+            }
+            initializeQuestions();
+            updateButtonsState();
+        });
+    </script>
+</body>
+</html>
